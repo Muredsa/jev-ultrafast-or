@@ -16,8 +16,10 @@ def _sync_environment():
     """Map the fork's OpenRouter configuration onto upstream variable names."""
     key = os.environ.get("OPENROUTER_API_KEY")
     if key:
-        os.environ.setdefault("TYPESAFE_API_KEY", key)
-        os.environ.setdefault("TEXT_MODEL_API_KEY", key)
+        if not os.environ.get("TYPESAFE_API_KEY"):
+            os.environ["TYPESAFE_API_KEY"] = key
+        if not os.environ.get("TEXT_MODEL_API_KEY"):
+            os.environ["TEXT_MODEL_API_KEY"] = key
 
     os.environ.setdefault("TYPESAFE_MODEL", os.environ.get("JEV_MODEL", OPENROUTER_JEV_MODEL))
     os.environ.setdefault("TEXT_MODEL_BASE_URL", OPENROUTER_CHAT_URL)
