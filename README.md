@@ -1,6 +1,8 @@
 <img src="docs/banner.svg" alt="Jev Ultrafast · Browser Use × TypeSafe" width="100%" />
 
-# Jev Ultrafast ⚡
+# Jev Ultrafast ⚡ — OpenRouter fork
+
+This fork routes **TypeSafe Jev through OpenRouter's Decisions API**. The browser policy and execution guards remain unchanged from upstream.
 
 **A browser agent with a dynamic, indexed action space.**
 
@@ -49,11 +51,11 @@ There are no site-specific action scripts or prepared field strings in the polic
 ## Try it
 
 ```bash
-git clone https://github.com/browser-use/jev-ultrafast.git
-cd jev-ultrafast
+git clone https://github.com/Muredsa/jev-ultrafast-or.git
+cd jev-ultrafast-or
 uv sync
 cp .env.example .env
-# Add TYPESAFE_API_KEY and TEXT_MODEL_API_KEY.
+# Add OPENROUTER_API_KEY. TEXT_MODEL_API_KEY is optional.
 uv run jev
 ```
 
@@ -61,7 +63,7 @@ Open **http://127.0.0.1:8766** and click **Start demo → Run automatically**. T
 
 Chrome connects through [Browser Harness](https://github.com/browser-use/browser-harness), installed by `uv sync`. Run `uv run browser-harness --doctor` if it needs connecting. Allow remote debugging in Chrome when prompted.
 
-`TEXT_MODEL_API_KEY` is an OpenRouter key in the example configuration. The current demo uses `inception/mercury-2.5` with reasoning disabled. Gemini, GLM, and DeepSeek can also use the OpenAI-compatible text helper; configure the appropriate model, endpoint, and reasoning setting.
+`OPENROUTER_API_KEY` is used for Jev through `https://openrouter.ai/api/alpha/decisions`. By default the same key is reused for the `TYPE_TEXT` helper through OpenRouter. Set `TEXT_MODEL_API_KEY` only if you want a separate credential. The default Jev model is `~typesafe/jev-latest`; set `JEV_MODEL=typesafe/jev-1.13` to pin the current version.
 
 ## Use the library
 
